@@ -1,0 +1,28 @@
+name: Using re-usable
+on: push
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Install terraform
+      uses: little-core-labs/install-terraform@v2.0.0
+      with:
+          version: 0.13.4 
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        shell: bash
+        run: ls
+  deploy:
+    needs: build
+    uses: ./.github/workflows/reusable.yml
