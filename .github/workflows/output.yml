@@ -1,5 +1,7 @@
 name: Output information
 on: workflow_dispatch
+env:
+  MONGODB_DB_NAME: ${{secrets.MONGODB_DB_NAME}}
 jobs:
   info:
     runs-on: ubuntu-latest
